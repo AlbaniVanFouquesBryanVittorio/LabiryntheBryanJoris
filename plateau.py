@@ -48,6 +48,7 @@ def Plateau(nbJoueurs, nbTresors):
          if plateau[x][y]==0:
            setVal(nouveauPlateau,x,y,L[0])
            L.pop(0)
+           
     
            
     
