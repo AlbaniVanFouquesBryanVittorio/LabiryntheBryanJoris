@@ -166,7 +166,10 @@ def prendrePion(c, pion):
     """
     
     listeP=c.get('pions')
-    listeP.pop(pion)
+    for i in range(len(listeP)):
+      if listeP[i]==pion:
+        listeP.pop(i)
+        break
 
 def poserPion(c, pion):
     """

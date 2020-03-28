@@ -25,7 +25,7 @@ def Plateau(nbJoueurs, nbTresors):
 
     nouveauPlateau=Matrice(7,7)
     setVal(nouveauPlateau,0,0,Carte(True,False,False,True,0,[1]))
-    setVal(nouveauPlateau,0,2,Carte(True,False,False,False,0,[2]))
+    setVal(nouveauPlateau,0,2,Carte(True,False,False,False,0,[1,2,3,4]))
     setVal(nouveauPlateau,0,4,Carte(True,False,False,False,0,[3]))
     setVal(nouveauPlateau,0,6,Carte(True,True,False,False))
     setVal(nouveauPlateau,2,0,Carte(False,False,False,True))
@@ -173,9 +173,9 @@ def prendrePionPlateau(plateau,lin,col,numJoueur):
                 numJoueur: le numéro du joueur qui correspond au pion
     Cette fonction ne retourne rien mais elle modifie le plateau
     """
-    carte=getVal(plateau,lig,col)
-    if numTresor==getTresor(carte):
-      prendreTresor(carte)
+    carte=getVal(plateau,lin,col)
+    if possedePion(carte,numJoueur):
+      prendrePion(carte,numJoueur)
       
 
 def poserPionPlateau(plateau,lin,col,numJoueur):
@@ -187,6 +187,8 @@ def poserPionPlateau(plateau,lin,col,numJoueur):
                 numJoueur: le numéro du joueur qui correspond au pion
     Cette fonction ne retourne rien mais elle modifie le plateau
     """
+    carte=getVal(plateau,lin,col)
+    poserPion(carte,numJoueur)
     pass
 
 
@@ -222,11 +224,15 @@ def accessibleDist(plateau,ligD,colD,ligA,colA):
 if __name__=="__main__" :
   p=Plateau(2,20)
   #print(creerCartesAmovibles(1,5))
-  print(p[0][0])
+  print(p[0][2])
   prendreTresorPlateau(p,0,0,1)
 
   print(getCoordonneesTresor(p,2))
 
   print(getCoordonneesJoueur(p,3))
 
-  #prendrePionPlateau(p,0,2,2)
+  prendrePionPlateau(p,0,2,5)
+  print(p[0][2])
+
+  poserPionPlateau(p,0,2,3)
+  print(p[0][2])
