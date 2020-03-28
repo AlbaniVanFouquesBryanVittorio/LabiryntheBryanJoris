@@ -221,11 +221,7 @@ def tourneAleatoire(c):
     x=random.randint(0,3)
     i=0
     while i<x:
-      y=c['nord']
-      c['nord']=c['est']
-      c['est']=c['sud']
-      c['sud']=c['ouest']
-      c['ouest']=y
+      tournerHoraire(c)
       i=i+1
     
 def coderMurs(c):

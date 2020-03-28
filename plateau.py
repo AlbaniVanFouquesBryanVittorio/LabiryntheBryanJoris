@@ -24,9 +24,9 @@ def Plateau(nbJoueurs, nbTresors):
     """
 
     nouveauPlateau=Matrice(7,7)
-    setVal(nouveauPlateau,0,0,Carte(True,False,False,True))
-    setVal(nouveauPlateau,0,2,Carte(True,False,False,False))
-    setVal(nouveauPlateau,0,4,Carte(True,False,False,False))
+    setVal(nouveauPlateau,0,0,Carte(True,False,False,True,0,[1]))
+    setVal(nouveauPlateau,0,2,Carte(True,False,False,False,0,[2]))
+    setVal(nouveauPlateau,0,4,Carte(True,False,False,False,0,[3]))
     setVal(nouveauPlateau,0,6,Carte(True,True,False,False))
     setVal(nouveauPlateau,2,0,Carte(False,False,False,True))
     setVal(nouveauPlateau,2,2,Carte(False,False,False,True))
@@ -45,16 +45,13 @@ def Plateau(nbJoueurs, nbTresors):
 
     for x in range(getNbLignes(nouveauPlateau)):
       for y in range(getNbColonnes(nouveauPlateau)):
-         if plateau[x][y]==0:
+         if nouveauPlateau[x][y]==0:
            setVal(nouveauPlateau,x,y,L[0])
            L.pop(0)
-           
+    
+    
     
            
-    
-
-
-
     
     return nouveauPlateau
 
@@ -133,10 +130,11 @@ def prendreTresorPlateau(plateau,lig,col,numTresor):
                 numTresor: le numéro du trésor à prendre sur la carte
     resultat: un booléen indiquant si le trésor était bien sur la carte considérée
     """
-
     carte=getVal(plateau,lig,col)
     if numTresor==getTresor(carte):
         prendreTresor(carte)
+        return True
+    
 
 
 def getCoordonneesTresor(plateau,numTresor):
@@ -149,7 +147,7 @@ def getCoordonneesTresor(plateau,numTresor):
     """
     for lig in range(getNbLignes(plateau)):
       for col in range(getNbColonnes(plateau)):
-        if plateau[lig][col]["tresor"]==numTresor:
+        if getTresor(plateau[lig][col])==numTresor:
           return (lig,col)
     return None
 
@@ -163,7 +161,7 @@ def getCoordonneesJoueur(plateau,numJoueur):
     """
     for lig in range(getNbLignes(plateau)):
       for col in range(getNbColonnes(plateau)):
-        for i in plateau[lig][col]["pion"]:
+        for i in getListePions(plateau[lig][col]):
           if i==numJoueur:
             return (lig,col)
     return None
@@ -177,9 +175,11 @@ def prendrePionPlateau(plateau,lin,col,numJoueur):
                 numJoueur: le numéro du joueur qui correspond au pion
     Cette fonction ne retourne rien mais elle modifie le plateau
     """
-    carte=getVal(plateau,lig,col)
-    if numTresor==getTresor(carte):
-      prendreTresor(carte)
+    carte=getVal(plateau,lin,col)
+    for i in getListePions(plateau[lig][col]): 
+    if numJoueur==getNom(joueur)(carte):
+      prendreJoueur(carte)
+      
 
 def poserPionPlateau(plateau,lin,col,numJoueur):
     """
@@ -223,5 +223,13 @@ def accessibleDist(plateau,ligD,colD,ligA,colA):
     pass
 
 if __name__=="__main__" :
-  #print(Plateau(2,20))
-  print(creerCartesAmovibles(1,5))
+  p=Plateau(2,20)
+  #print(creerCartesAmovibles(1,5))
+  print(p[0][0])
+  prendreTresorPlateau(p,0,0,1)
+
+  print(getCoordonneesTresor(p,2))
+
+  print(getCoordonneesJoueur(p,3))
+
+  #prendrePionPlateau(p,0,2,2)
