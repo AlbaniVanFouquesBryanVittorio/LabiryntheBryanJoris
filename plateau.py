@@ -130,11 +130,10 @@ def prendreTresorPlateau(plateau,lig,col,numTresor):
                 numTresor: le numéro du trésor à prendre sur la carte
     resultat: un booléen indiquant si le trésor était bien sur la carte considérée
     """
+
     carte=getVal(plateau,lig,col)
     if numTresor==getTresor(carte):
         prendreTresor(carte)
-        return True
-    
 
 
 def getCoordonneesTresor(plateau,numTresor):
@@ -161,9 +160,8 @@ def getCoordonneesJoueur(plateau,numJoueur):
     """
     for lig in range(getNbLignes(plateau)):
       for col in range(getNbColonnes(plateau)):
-        for i in getListePions(plateau[lig][col]):
-          if i==numJoueur:
-            return (lig,col)
+        if possedePion(plateau[lig][col],numJoueur):
+          return (lig,col)
     return None
 
 def prendrePionPlateau(plateau,lin,col,numJoueur):
@@ -175,10 +173,9 @@ def prendrePionPlateau(plateau,lin,col,numJoueur):
                 numJoueur: le numéro du joueur qui correspond au pion
     Cette fonction ne retourne rien mais elle modifie le plateau
     """
-    carte=getVal(plateau,lin,col)
-    for i in getListePions(plateau[lig][col]): 
-    if numJoueur==getNom(joueur)(carte):
-      prendreJoueur(carte)
+    carte=getVal(plateau,lig,col)
+    if numTresor==getTresor(carte):
+      prendreTresor(carte)
       
 
 def poserPionPlateau(plateau,lin,col,numJoueur):

@@ -36,8 +36,7 @@ def ajouterJoueur(joueurs, joueur):
                 joueur le joueur à ajouter
     cette fonction ne retourne rien mais modifie la liste des joueurs
     """
-    nouveaujoueur=Joueur(joueur)
-    joueurs[0].append(nouveaujoueur)
+    joueurs[0].append(joueur)
     
 
 def initAleatoireJoueurCourant(joueurs):
@@ -183,7 +182,8 @@ if __name__=="__main__" :
   print(liste)  
   print("")
 
-  ajouterJoueur(liste, "oui")
+  oui=Joueur("oui")
+  ajouterJoueur(liste, oui)
   print(liste)
   print("")
   
