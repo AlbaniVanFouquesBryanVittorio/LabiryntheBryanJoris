@@ -25,6 +25,11 @@ def Labyrinthe(nomsJoueurs=["joueur1","joueurs2"],nbTresors=24, nbTresorsMax=0):
                 nbTresorMax le nombre de trésors maximum distribué à chaque joueur
     résultat: le labyrinthe crée
     """
+    nouveauLabyrinthe=Plateau(getNbJoueurs(nomJoueurs),nbTresors)
+
+    initAleatoireJoueurCourant(joueurs)
+
+    distribuerTresors(joueurs,nbTresors=24, nbTresorMax=0)
     pass
 
 def getPlateau(labyrinthe):
@@ -169,6 +174,7 @@ def tournerCarte(labyrinthe,sens='H'):
                 sens: un caractère indiquant le sens dans lequel tourner la carte
      Cette fonction ne retourne pas de résultat mais mais à jour le labyrinthe    
     """
+    
     pass
 
 def getTresorCourant(labyrinthe):

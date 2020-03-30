@@ -41,17 +41,27 @@ def Plateau(nbJoueurs, nbTresors):
     setVal(nouveauPlateau,6,4,Carte(False,False,True,False))
     setVal(nouveauPlateau,6,6,Carte(False,True,True,False))
   
-    L=creerCartesAmovibles(1,nbTresors)
+    L=creerCartesAmovibles(1,nbTresors) 
 
+    #Ajoute chaque carte une à une dans le plateau où il y a un zero
     for x in range(getNbLignes(nouveauPlateau)):
       for y in range(getNbColonnes(nouveauPlateau)):
          if nouveauPlateau[x][y]==0:
            setVal(nouveauPlateau,x,y,L[0])
            L.pop(0)
     
+    #réparti les trésors aléatoirement sur les cartes 
+    ListeTrésor=[]
     
+    for i in range(1,nbTresors):
+      ListeTrésor.append(i)
+
+    while len(ListeTrésor)!=0:
+      
+      ListeTrésor.pop(0)
+
     
-           
+    print('ListeTre',ListeTrésor)     
     
     return nouveauPlateau
 
@@ -203,7 +213,38 @@ def accessible(plateau,ligD,colD,ligA,colA):
     résultat: un boolean indiquant s'il existe un chemin entre la case de départ
               et la case d'arrivée
     """
-    pass
+
+      
+    carte1=(plateau[ligD][colD])
+    carte2=(plateau[ligA][colA])
+
+    while carte1!=carte2:
+      carte3=(plateau[ligD][colD+1])
+      if passageNord(carte1,carte3):        
+        carte1=(plateau[ligD][colD+1])
+      else:
+        carte3=(plateau[ligD][colD-1])
+
+        carte3=(plateau[ligD][colD-1])
+        if passageSud(carte1,carte3):        
+          carte1=(plateau[ligD][colD-1])
+        else:
+          carte3=(plateau[ligD][colD+1])
+      
+          carte3=(plateau[ligD+1][colD])
+          if passageOuest(carte1,carte3):        
+            carte1=(plateau[ligD+1][colD])
+          else:
+            carte3=(plateau[ligD-1][colD])
+      
+            carte3=(plateau[ligD-1][colD])
+            if passageEst(carte1,carte3):        
+              carte1=(plateau[ligD-1][colD])
+            else:
+              carte3=(plateau[ligD+1][colD])
+      
+      
+      pass
 
 def accessibleDist(plateau,ligD,colD,ligA,colA):
     """
@@ -224,7 +265,7 @@ def accessibleDist(plateau,ligD,colD,ligA,colA):
 if __name__=="__main__" :
   p=Plateau(2,20)
   #print(creerCartesAmovibles(1,5))
-  print(p[0][2])
+  print(p[0][2+1])
   prendreTresorPlateau(p,0,0,1)
 
   print(getCoordonneesTresor(p,2))
