@@ -208,7 +208,7 @@ if __name__=="__main__" :
   joueurCourantTrouveTresor(liste)
 
   print(nbTresorsRestantsJoueur(liste,0))
-  print("")
+  print("oui")
 
   print(numJoueurCourant(liste))
   print("")

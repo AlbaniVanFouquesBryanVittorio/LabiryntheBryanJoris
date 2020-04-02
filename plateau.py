@@ -24,9 +24,9 @@ def Plateau(nbJoueurs, nbTresors):
     """
 
     nouveauPlateau=Matrice(7,7)
-    setVal(nouveauPlateau,0,0,Carte(True,False,False,True,0,[1]))
-    setVal(nouveauPlateau,0,2,Carte(True,False,False,False,0,[1,2,3,4]))
-    setVal(nouveauPlateau,0,4,Carte(True,False,False,False,0,[3]))
+    setVal(nouveauPlateau,0,0,Carte(True,False,False,True,1,[1]))
+    setVal(nouveauPlateau,0,2,Carte(True,False,False,False,2,[1,2,3,4]))
+    setVal(nouveauPlateau,0,4,Carte(True,False,False,False,3,[3]))
     setVal(nouveauPlateau,0,6,Carte(True,True,False,False))
     setVal(nouveauPlateau,2,0,Carte(False,False,False,True))
     setVal(nouveauPlateau,2,2,Carte(False,False,False,True))
