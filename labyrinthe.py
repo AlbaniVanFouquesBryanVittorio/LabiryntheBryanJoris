@@ -25,7 +25,8 @@ def Labyrinthe(nomsJoueurs=["joueur1","joueurs2"],nbTresors=24, nbTresorsMax=0):
                 nbTresorMax le nombre de trésors maximum distribué à chaque joueur
     résultat: le labyrinthe crée
     """
-    nouveauLabyrinthe={"listeJoueur" : ListeJoueurs(nomsJoueurs), "plateau" : Plateau(getNbJoueurs(nomsJoueurs),nbTresors), "phase" : 1}
+    
+    nouveauLabyrinthe={"listeJoueur" : ListeJoueurs(nomsJoueurs), "plateau" : Plateau(getNbJoueurs(nomsJoueurs),nbTresors), "phase" : 1, "coupInterdit": 0}
 
     initAleatoireJoueurCourant(nouveauLabyrinthe["listeJoueur"])
 
@@ -157,7 +158,25 @@ def coupInterdit(labyrinthe,direction,rangee):
                 rangee: le numéro de la ligne ou de la colonne choisie
     résultat: un booléen indiquant si le coup est interdit ou non
     """
-    pass
+    res=False
+
+    if [direction,rangee]==labyrinthe["coupInterdit"]:
+      res=True
+    else:
+      if direction=="N":
+        labyrinthe["coupInterdit"]=["S",rangee]
+
+      elif direction=="S":
+        labyrinthe["coupInterdit"]=["N",rangee]
+
+      elif direction=="E":
+        labyrinthe["coupInterdit"]=["O",rangee]
+
+      elif direction=="O":
+        labyrinthe["coupInterdit"]=["E",rangee]
+
+    return res
+
 
 def jouerCarte(labyrinthe,direction,rangee):
     """
@@ -172,15 +191,18 @@ def jouerCarte(labyrinthe,direction,rangee):
     Cette fonction ne retourne pas de résultat mais mais à jour le labyrinthe
     """
     carte=getCarteAJouer(labyrinthe["plateau"])
+    
+    if not coupInterdit(labyrinthe,direction,rangee):
+      if direction=="N":
+        nouvelleCarte=decalageColonneEnBas(labyrinthe["plateau"], rangee, carte)
 
-    if direction=="N":
-      nouvelleCarte=decalageColonneEnBas(labyrinthe["plateau"], rangee, carte)
-    elif direction=="S":
-      nouvelleCarte=decalageColonneEnHaut(labyrinthe["plateau"], rangee, carte)
-    elif direction=="E":  
-      nouvelleCarte=decalageLigneAGauche(labyrinthe["plateau"], rangee, carte)
-    elif direction=="O":
-      nouvelleCarte=decalageLigneADroite(labyrinthe["plateau"], rangee, carte)
+      elif direction=="S":
+        nouvelleCarte=decalageColonneEnHaut(labyrinthe["plateau"], rangee, carte)
+
+      elif direction=="E":  
+        nouvelleCarte=decalageLigneAGauche(labyrinthe["plateau"], rangee, carte)
+      elif direction=="O":
+        nouvelleCarte=decalageLigneADroite(labyrinthe["plateau"], rangee, carte)
     
     
 
