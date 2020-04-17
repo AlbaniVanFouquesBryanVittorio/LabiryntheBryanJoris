@@ -72,7 +72,7 @@ def Plateau(nbJoueurs, nbTresors):
     ListeTrésor=[]
     Coord={1:[0,0],2:[0,1],3:[0,2],4:[0,3],5:[0,4],6:[0,5],7:[0,6],8:[1,0],9:[1,1],10:[1,2],11:[1,3],12:[1,4],13:[1,5],14:[1,6],15:[2,0],16:[2,1],17:[2,2],18:[2,3],19:[2,4],20:[2,5],21:[2,6],22:[3,0],23:[3,1],24:[3,2],25:[3,3],26:[3,4],27:[3,5],28:[3,6],29:[4,0],30:[4,1],31:[4,2],32:[4,3],33:[4,4],34:[4,5],35:[4,6],36:[5,0],37:[5,1],38:[5,2],39:[5,3],40:[5,4],41:[5,5],42:[5,6],43:[6,0],44:[6,1],45:[6,2],46:[6,3],47:[6,4],48:[6,5],49:[6,6]}
 
-    print(nbTresors)
+    #print(nbTresors)
     for i in range(1,nbTresors+1):
       ListeTrésor.append(i)
 
@@ -193,9 +193,11 @@ def getCoordonneesJoueur(plateau,numJoueur):
     resultat: un couple d'entier donnant les coordonnées du joueur ou None si
               le joueur n'est pas sur le plateau
     """
-    print("oui")
-    for lig in range(getNbLignes(plateau["plateau"])):
-      for col in range(getNbColonnes(plateau["plateau"])):
+    #nbLignes=getNbLignes(plateau["plateau"])
+    #nbCol=getNbColonnes(plateau["plateau"])
+    
+    for lig in range(6):
+      for col in range(6):
         if possedePion(plateau["plateau"][lig][col],numJoueur):
           return (lig,col)
     return None
@@ -238,46 +240,58 @@ def accessible(plateau,ligD,colD,ligA,colA):
     résultat: un boolean indiquant s'il existe un chemin entre la case de départ
               et la case d'arrivée
     """
-    carte1=(plateau["plateau"][ligD][colD])
-    carte2=(plateau["plateau"][ligA][colA])
+    
+    casesPlateau=Matrice(7,7)
+    setVal(casesPlateau,ligD,colD,1)
 
-    listeAccessible=[]
+    for i in range(0,2):
+      if i==0:
+        a=0
+        b=7
+        c=1
+      if i==1:
+        a=6
+        b=0
+        c=-1
+      for x in range(a,b,c):
+        for y in range(a,b,c):
+          if getVal(casesPlateau,x,y)==1:
+            carte1=(plateau["plateau"][x][y])
+            
+            try:
+              if (casesPlateau[x][y+1])!=1:
+                if passageNord(carte1,(plateau["plateau"][x][y+1])):
+                  setVal(casesPlateau,x,(y+1),1)
+            except:
+              pass
 
-    for i in range(4):
-      listeAccessible.append(plateau["plateau"][ligD][colD])
+            try:
+              if (casesPlateau[x][y-1])!=1:
+                if passageSud(carte1,(plateau["plateau"][x][y-1])):
+                  setVal(casesPlateau,x,(y-1),1)
+            except:
+              pass
 
-    listeAccessible=[plateau["plateau"][ligD][colD+1], plateau["plateau"][ligD][colD],plateau["plateau"][ligD][colD],plateau["plateau"][ligD][colD]]
+            try:
+              if (casesPlateau[x-1][y])!=1:
+                if passageOuest(carte1,(plateau["plateau"][x-1][y])):
+                  setVal(casesPlateau,(x-1),y,1)
+            except:
+              pass
 
-    while carte1!=carte2:
+            try:
+              if (casesPlateau[x+1][y])!=1:
+                if passageEst(carte1,(plateau["plateau"][x+1][y])):
+                  setVal(casesPlateau,(x+1),y,1)
+            except:
+              pass   
+      #print("")   
+      #print(casesPlateau)
 
-      carte3=(plateau[ligD][colD+1])
-      if passageNord(carte1,carte3):        
-        carte1=(plateau[ligD][colD+1])
-      else:
-        carte3=(plateau[ligD][colD-1])
-
-
-
-
-
-        carte3=(plateau[ligD][colD-1])
-        if passageSud(carte1,carte3):        
-          carte1=(plateau[ligD][colD-1])
-        else:
-          carte3=(plateau[ligD][colD+1])
-      
-          carte3=(plateau[ligD+1][colD])
-          if passageOuest(carte1,carte3):        
-            carte1=(plateau[ligD+1][colD])
-          else:
-            carte3=(plateau[ligD-1][colD])
-      
-            carte3=(plateau[ligD-1][colD])
-            if passageEst(carte1,carte3):        
-              carte1=(plateau[ligD-1][colD])
-            else:
-              carte3=(plateau[ligD+1][colD])
-      
+    if getVal(casesPlateau,ligA,colA)==1:
+      return True
+    else:
+      return False
       
 def accessibleDist(plateau,ligD,colD,ligA,colA):
     """
@@ -293,18 +307,108 @@ def accessibleDist(plateau,ligD,colD,ligA,colA):
     résultat: une liste de coordonées indiquant un chemin possible entre la case
               de départ et la case d'arrivée
     """
-    pass
+    
+    if accessible(plateau,ligD,colD,ligA,colA):
+    #if 2==2:
+      casesPlateau=Matrice(7,7)
+      setVal(casesPlateau,ligD,colD,1)
+
+      nouvelleValeur=1
+      for i in range(0,2):
+
+        if i==0:
+          a=0
+          b=7
+          c=1
+        if i==1:
+          a=6
+          b=0
+          c=-1
+
+        for x in range(a,b,c):
+          for y in range(a,b,c):
+            if getVal(casesPlateau,x,y)!=0:
+              carte1=(plateau["plateau"][x][y])
+              nouvelleValeur+=1
+              
+              try:
+                if (casesPlateau[x][y+1])!=1:
+                  if passageNord(carte1,(plateau["plateau"][x][y+1])):
+                    if getVal(casesPlateau,x,y+1)==0:
+                      setVal(casesPlateau,x,(y+1),nouvelleValeur)
+              except:
+                pass
+
+              try:
+                if (casesPlateau[x][y-1])!=1:
+                  if passageSud(carte1,(plateau["plateau"][x][y-1])):
+                    if getVal(casesPlateau,x,y-1)==0:
+                      setVal(casesPlateau,x,(y-1),nouvelleValeur)
+              except:
+                pass
+
+              try:
+                if (casesPlateau[x-1][y])!=1:
+                  if passageOuest(carte1,(plateau["plateau"][x-1][y])):
+                    if getVal(casesPlateau,x-1,y)==0:
+                      setVal(casesPlateau,(x-1),y,nouvelleValeur)
+              except:
+                pass
+
+              try:
+                if (casesPlateau[x+1][y])!=1:
+                  if passageEst(carte1,(plateau["plateau"][x+1][y])):
+                    if getVal(casesPlateau,x+1,y)==0:
+                      setVal(casesPlateau,(x+1),y,nouvelleValeur)
+              except:
+                pass   
+        print("")   
+        print(casesPlateau)
+
+      chemin=[]
+      ar=getVal(casesPlateau,ligA,colA)
+      ligC=ligA
+      colC=colA
+      for x in range(ar,0,-1):
+        if getVal(casesPlateau,ligC,colC+1)==x:
+          chemin.append((ligC,colC+1))
+          colC+=1
+        
+        elif getVal(casesPlateau,ligC,colC-1)==x:
+          chemin.append((ligC,colC-1))
+          colC-=1
+
+        elif getVal(casesPlateau,ligC-1,colC)==x:
+          chemin.append((ligC-1,colC))
+          ligC-=1
+
+        elif getVal(casesPlateau,ligC+1,colC)==x:
+          chemin.append((ligC+1,colC))
+          ligC+=1
+        print(chemin)
+
+
+        if len(chemin)==0:
+          return None
+        else:
+          return chemin
+      
 
 if __name__=="__main__" :
   p=Plateau(2,10)
+  
   #print(creerCartesAmovibles(1,5))
  
-  prendreTresorPlateau(p,0,0,1)
+  #prendreTresorPlateau(p,0,0,1)
 
-  print(getCoordonneesTresor(p,2))
+  #print(getCoordonneesTresor(p,2))
   
   print(getCoordonneesJoueur(p,1))
 
-  pre=prendrePionPlateau(p,0,2,5)
+  #pre=prendrePionPlateau(p,0,2,5)
 
-  poserPionPlateau(p,0,2,3)
+  #poserPionPlateau(p,0,2,3)
+  
+  #print(accessible(p,2,3,2,4))
+  
+  #print(accessibleDist(p,0,0,2,2))
