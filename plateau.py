@@ -98,58 +98,14 @@ def creerCartesAmovibles(tresorDebut,nbTresors):
                 nbTresors: le nombre total de trésor à créer
     résultat: la liste mélangée aléatoirement des cartes amovibles créees
     """
-    Dcarte={'Angle':16,'Jonction':6,'Droit':12}
-    ListeCarteA=[]
-    i=0
-    x=random.randint(0,2)
+   Liste0=[Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(False,False,False,True),Carte(False,False,False,True),Carte(False,False,False,True),Carte(False,False,False,True),Carte(False,False,False,True),Carte(False,False,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True)]
 
-    while i<34:
-      if x==0:
-        c=Carte(True,False,False,True)
-        tourneAleatoire(c)
-        ListeCarteA.append(c)
-        y=Dcarte['Angle']
-        Dcarte['Angle']=y-1
-        if Dcarte['Angle']==0:
-          if Dcarte['Jonction']==0:
-            x=2
-          elif Dcarte['Droit']==0:
-            x=1
-          else:
-            x=random.randint(1,2)
-        i=i+1
-
-      elif x==1:
-        c=Carte(True,False,False,False)
-        tourneAleatoire(c)
-        ListeCarteA.append(c)
-        y=Dcarte['Jonction']
-        Dcarte['Jonction']=y-1
-        if Dcarte['Jonction']==0:
-          if Dcarte['Angle']==0:
-            x=2
-          elif Dcarte['Droit']==0:
-            x=0
-          else:
-            x=random.randrange(0,2,2)
-        i=i+1
-
-      elif x==2:
-        c=Carte(True,False,True,False)
-        tourneAleatoire(c)
-        ListeCarteA.append(c)
-        y=Dcarte['Droit']
-        Dcarte['Droit']=y-1
-        if Dcarte['Droit']==0:
-          if Dcarte['Angle']==0:
-            x=1
-          elif Dcarte['Jonction']==0:
-            x=0
-          else:
-            x=random.randint(0,1)
-        i=i+1
-      
-    return ListeCarteA
+    for i in range(len(Liste0)-1):
+      tourneAleatoire(Liste0[i])
+    
+    random.shuffle(Liste0)
+    
+    return Liste0
 
 
 def prendrePlateau(plateau):
