@@ -152,6 +152,23 @@ def creerCartesAmovibles(tresorDebut,nbTresors):
     return ListeCarteA
 
 
+def prendrePlateau(plateau):
+    """
+    retourne la matrice représentant le plateau de jeu
+    paramètre: plateau le plateau considéré
+    résultat: la matrice représentant le plateau de ce labyrinthe
+    """
+    return plateau["plateau"]
+
+def prendreCarteAJouer(plateau):
+    """
+    donne la carte à jouer
+    paramètre: plateau: le plateau considéré
+    résultat: la carte à jouer    
+    """    
+    carteJouer=plateau["carte"]
+    return carteJouer
+
 def prendreTresorPlateau(plateau,lig,col,numTresor):
     """
     prend le tresor numTresor qui se trouve sur la carte en lin,col du plateau

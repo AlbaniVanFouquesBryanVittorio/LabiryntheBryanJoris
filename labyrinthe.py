@@ -28,7 +28,7 @@ def Labyrinthe(nomsJoueurs=["joueur1","joueurs2"],nbTresors=24, nbTresorsMax=0):
     nouveauPlateau=Plateau(getNbJoueurs(nomsJoueurs),nbTresors)
     print(nouveauPlateau["carte"])
     
-    nouveauLabyrinthe={"listeJoueur" : ListeJoueurs(nomsJoueurs), "plateau" : nouveauPlateau["plateau"], "carteAmo" : nouveauPlateau["carte"], "phase" : 1, "coupInterdit": 0}
+    nouveauLabyrinthe={"listeJoueur" : ListeJoueurs(nomsJoueurs), "plateau" : nouveauPlateau, "phase" : 1, "coupInterdit": 0}
 
     distribuerTresors(nouveauLabyrinthe["listeJoueur"],nbTresors, nbTresorsMax)
 
@@ -42,7 +42,7 @@ def getPlateau(labyrinthe):
     paramètre: labyrinthe le labyrinthe considéré
     résultat: la matrice représentant le plateau de ce labyrinthe
     """
-    return labyrinthe["plateau"]
+    return prendrePlateau(labyrinthe)
 
 def getNbParticipants(labyrinthe):
     """
@@ -151,8 +151,7 @@ def getCarteAJouer(labyrinthe):
     paramètre: labyrinthe: le labyrinthe considéré
     résultat: la carte à jouer    
     """    
-    carteJouer=labyrinthe["carteAmo"]
-    return carteJouer
+    return prendreCarteAJouer(labyrinthe)
 
 def coupInterdit(labyrinthe,direction,rangee):
     """ 
@@ -340,7 +339,7 @@ if __name__=="__main__" :
   
   labyrinthe=Labyrinthe(nomsJoueurs=["joueur1","joueurs2"],nbTresors=24, nbTresorsMax=0)
 
-  getPlateau(labyrinthe)
+  plateau=getPlateau(labyrinthe)
 
   print(getNbParticipants(labyrinthe))
 

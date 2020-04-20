@@ -91,7 +91,7 @@ def getNbJoueurs(joueurs):
     paramètre: joueurs la liste des joueurs
     résultat: le nombre de joueurs de la partie
     """
-    return len(joueurs)
+    return len(joueurs[0])
 
 def getJoueurCourant(joueurs):
     """
@@ -118,7 +118,7 @@ def nbTresorsRestantsJoueur(joueurs,numJoueur):
                 numJoueur le numéro du joueur
     résultat: le nombre de trésors que joueur numJoueur doit encore trouver
     """
-    return getNbTresorsRestants(joueurs[0][numJoueur])
+    return getNbTresorsRestants(joueurs[0][numJoueur-1])
 
 def numJoueurCourant(joueurs):
     """
@@ -126,7 +126,7 @@ def numJoueurCourant(joueurs):
     paramètre: joueurs la liste des joueurs
     résultat: le numéro du joueur courant
     """
-    return joueurs[1]
+    return joueurs[1]+1
 
 def nomJoueurCourant(joueurs):
     """
@@ -143,7 +143,7 @@ def nomJoueur(joueurs,numJoueur):
                 numJoueur le numéro du joueur    
     résultat: le nom du joueur numJoueur
     """
-    return getNom(joueurs[0][numJoueur])
+    return getNom(joueurs[0][numJoueur-1])
 
 def prochainTresorJoueur(joueurs,numJoueur):
     """
@@ -152,7 +152,7 @@ def prochainTresorJoueur(joueurs,numJoueur):
                 numJoueur le numéro du joueur    
     résultat: le prochain trésor du joueur numJoueur (un entier)
     """
-    return prochainTresor(joueurs[0][numJoueur])
+    return prochainTresor(joueurs[0][numJoueur-1])
 
 def tresorCourant(joueurs):
     """
