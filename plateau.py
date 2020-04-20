@@ -90,22 +90,22 @@ def Plateau(nbJoueurs, nbTresors):
 
 
 def creerCartesAmovibles(tresorDebut,nbTresors):
-    """
-    fonction utilitaire qui permet de créer les cartes amovibles du jeu en y positionnant
-    aléatoirement nbTresor trésors
-    la fonction retourne la liste, mélangée aléatoirement, des cartes ainsi créées
-    paramètres: tresorDebut: le numéro du premier trésor à créer
-                nbTresors: le nombre total de trésor à créer
-    résultat: la liste mélangée aléatoirement des cartes amovibles créees
-    """
-   Liste0=[Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(False,False,False,True),Carte(False,False,False,True),Carte(False,False,False,True),Carte(False,False,False,True),Carte(False,False,False,True),Carte(False,False,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True)]
+  """
+  fonction utilitaire qui permet de créer les cartes amovibles du jeu en y positionnant
+  aléatoirement nbTresor trésors
+  la fonction retourne la liste, mélangée aléatoirement, des cartes ainsi créées
+  paramètres: tresorDebut: le numéro du premier trésor à créer
+              nbTresors: le nombre total de trésor à créer
+  résultat: la liste mélangée aléatoirement des cartes amovibles créees
+  """
+  Liste0=[Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(True,False,False,True),Carte(False,False,False,True),Carte(False,False,False,True),Carte(False,False,False,True),Carte(False,False,False,True),Carte(False,False,False,True),Carte(False,False,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True),Carte(False,True,False,True)]
 
-    for i in range(len(Liste0)-1):
-      tourneAleatoire(Liste0[i])
-    
-    random.shuffle(Liste0)
-    
-    return Liste0
+  for i in range(len(Liste0)-1):
+    tourneAleatoire(Liste0[i])
+  
+  random.shuffle(Liste0)
+  
+  return Liste0
 
 
 def prendrePlateau(plateau):
