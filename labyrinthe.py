@@ -33,7 +33,7 @@ def Labyrinthe(nomsJoueurs=["joueur1","joueurs2"],nbTresors=24, nbTresorsMax=0):
     distribuerTresors(nouveauLabyrinthe["listeJoueur"],nbTresors, nbTresorsMax)
 
     initAleatoireJoueurCourant(nouveauLabyrinthe["listeJoueur"])
-
+  
     return nouveauLabyrinthe
 
 def getPlateau(labyrinthe):
@@ -87,7 +87,6 @@ def changerPhase(labyrinthe):
       labyrinthe["phase"]=2
     else:
       labyrinthe["phase"]=1
-      changerJoueurCourant(labyrinthe["listeJoueur"])
 
 def getNbTresors(labyrinthe):
     """
@@ -250,7 +249,7 @@ def getCoordonneesJoueurCourant(labyrinthe):
               n'est pas sur le plateau
     """
     numJoueur=getNumJoueurCourant(labyrinthe)
-    getCoordonneesJoueur(labyrinthe["plateau"],numJoueur)
+    return getCoordonneesJoueur(labyrinthe,numJoueur)
 
 
 def executerActionPhase1(labyrinthe,action,rangee):
@@ -300,10 +299,11 @@ def accessibleDistJoueurCourant(labyrinthe, ligA,colA):
     résultat: une liste de couples d'entier représentant un chemin que le joueur
               courant atteigne la case d'arrivée s'il existe None si pas de chemin
     """
-    ligD=getCoordonneesJoueurCourant(labyrinthe)
-    plateau=labyrinthe["plateau"]
-    if accessible(plateau,ligD,colD,ligA,colA):
-      accessibleDist(plateau,ligD,colD,ligA,colA)
+    coord=getCoordonneesJoueurCourant(labyrinthe)
+    ligD=coord[0]
+    colD=coord[1]
+    if accessible(labyrinthe,ligD,colD,ligA,colA):
+      return accessibleDist(labyrinthe,ligD,colD,ligA,colA)
 
 def finirTour(labyrinthe):
     """
@@ -330,7 +330,8 @@ def finirTour(labyrinthe):
       if nbTresorsRestantsJoueur(labyrinthe["listeJoueur"],numJoueur)==0:   
         res=2
         joueurCourantAFini(labyrinthe["listeJoueur"])     
-    else:
+    else:      
+      changerJoueurCourant(labyrinthe["listeJoueur"])
       res=0
     changerPhase(labyrinthe)
 
@@ -347,11 +348,13 @@ if __name__=="__main__" :
 
   print(getNumJoueurCourant(labyrinthe))
 
-  #print(getNbTresors(labyrinthe))
+  print(getNbTresors(labyrinthe))
 
   print(getListeJoueurs(labyrinthe))
   
   print(getCoordonneesJoueurCourant(labyrinthe))
 
-  #enleverTresor(labyrinthe,0,0,1)
-  #print(getNbTresors(labyrinthe))
+  enleverTresor(labyrinthe,0,0,1)
+  print(getNbTresors(labyrinthe))
+
+  print(accessibleDistJoueurCourant(labyrinthe,1,1))
