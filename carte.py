@@ -326,7 +326,6 @@ def toChar(c):
     paramètres c une carte
     """
     i=int(coderMurs(c))
-    print('i:',i)
     res=listeCartes[i]
     return res
 

@@ -49,8 +49,6 @@ def afficheCarte(lmt, carte,pion=1,tresor=-1):
                 tresor: numero du trésor à afficher (le trésor recherché
     Le fonction ne retourne rien mais affiche à l'écran la carte
     """
-    #print(carte)
-    #print(getTresor(carte))
 
     coulFond=NORMAL
     coulCar=NORMAL
