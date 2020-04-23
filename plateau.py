@@ -153,7 +153,7 @@ def getCoordonneesTresor(plateau,numTresor):
     """
     for lig in range(getNbLignes(plateau["plateau"])):
       for col in range(getNbColonnes(plateau["plateau"])):
-        if getTresor(plateau["plateau"][lig][col])==numTresor:
+        if getTresor(getVal(plateau["plateau"],lig,col))==numTresor:
           return (lig,col)
     return None
 
