@@ -152,8 +152,7 @@ def mettreTresor(c,tresor):
     résultat l'entier représentant le trésor qui était sur la carte
     """
     res=getTresor(c)
-    c['tresor']=tresor
-  
+    c['tresor']=tresor  
 
     return res
 

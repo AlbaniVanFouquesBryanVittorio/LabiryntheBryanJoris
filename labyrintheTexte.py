@@ -22,7 +22,7 @@ def LabyrintheTexte(labyrinthe):
     résultat: une vue texte du labyrinthe
     """
     return {"labyrinthe":labyrinthe}
-    
+  
 def setLabyrinthe(lmt,labyrinthe):
     """
     association d'un jeu de labyrinthe à la vue mode texte
@@ -49,6 +49,9 @@ def afficheCarte(lmt, carte,pion=1,tresor=-1):
                 tresor: numero du trésor à afficher (le trésor recherché
     Le fonction ne retourne rien mais affiche à l'écran la carte
     """
+    #print(carte)
+    #print(getTresor(carte))
+
     coulFond=NORMAL
     coulCar=NORMAL
     style=AUCUN
@@ -162,8 +165,6 @@ def saisirOrdre(lmt):
               c'est à dire le numéro de la ligne ou de la colonne où insérer la carte
               si l'ordre saisi n'est pas valide la focntion retourne (-1,-1)
     """
-    #x=input
-    #y=input
     if x=="T":
       res=(x,y)
     elif x in("N","E","S","O"):
@@ -178,9 +179,7 @@ def saisirDeplacement(lmt):
     permet de saisir les coordonnées du point d'arrivée visé par le joueur courant
     paramètre: lmt: une vue texte de labyrinthe
     résultat: un couple d'entier (lin,col) indiquant les coordonnées de la case destination. Si l'utilisateur a entré des coordonnées incorrecte la fonction retourne (-1,-1)
-    """    
-    #lin=input 
-    #col=input 
+    """   
     if 0<=lin<=6 and  0<=col<=6:
       res=(lin,col)
     else:
@@ -279,7 +278,7 @@ if __name__=='__main__':
         print("Le nombre maximum de trésor a été choisi")
     #initialisation du labyrinthe
     l=Labyrinthe(listeJoueurs,nbTresorsMax=nbTresorsInt)
-    #initialisation de l'affichage
+
     g=LabyrintheTexte(l)
     #démarrage de la partie
     demarrer(g)

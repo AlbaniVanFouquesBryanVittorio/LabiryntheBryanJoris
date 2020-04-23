@@ -26,7 +26,6 @@ def Labyrinthe(nomsJoueurs=["joueur1","joueurs2"],nbTresors=24, nbTresorsMax=0):
     résultat: le labyrinthe crée
     """
     nouveauPlateau=Plateau(getNbJoueurs(nomsJoueurs),nbTresors)
-    print(nouveauPlateau["carte"])
     
     nouveauLabyrinthe={"listeJoueur" : ListeJoueurs(nomsJoueurs), "plateau" : nouveauPlateau, "phase" : 1, "coupInterdit": 0}
 
@@ -42,7 +41,7 @@ def getPlateau(labyrinthe):
     paramètre: labyrinthe le labyrinthe considéré
     résultat: la matrice représentant le plateau de ce labyrinthe
     """
-    return prendrePlateau(labyrinthe)
+    return prendrePlateau(labyrinthe["plateau"])
 
 def getNbParticipants(labyrinthe):
     """
@@ -151,7 +150,7 @@ def getCarteAJouer(labyrinthe):
     paramètre: labyrinthe: le labyrinthe considéré
     résultat: la carte à jouer    
     """    
-    return prendreCarteAJouer(labyrinthe)
+    return prendreCarteAJouer(labyrinthe["plateau"])
 
 def coupInterdit(labyrinthe,direction,rangee):
     """ 

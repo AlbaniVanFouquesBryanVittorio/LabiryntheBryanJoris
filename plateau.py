@@ -72,7 +72,7 @@ def Plateau(nbJoueurs, nbTresors):
     ListeTrésor=[]
     Coord={1:[0,0],2:[0,1],3:[0,2],4:[0,3],5:[0,4],6:[0,5],7:[0,6],8:[1,0],9:[1,1],10:[1,2],11:[1,3],12:[1,4],13:[1,5],14:[1,6],15:[2,0],16:[2,1],17:[2,2],18:[2,3],19:[2,4],20:[2,5],21:[2,6],22:[3,0],23:[3,1],24:[3,2],25:[3,3],26:[3,4],27:[3,5],28:[3,6],29:[4,0],30:[4,1],31:[4,2],32:[4,3],33:[4,4],34:[4,5],35:[4,6],36:[5,0],37:[5,1],38:[5,2],39:[5,3],40:[5,4],41:[5,5],42:[5,6],43:[6,0],44:[6,1],45:[6,2],46:[6,3],47:[6,4],48:[6,5],49:[6,6]}
 
-    #print(nbTresors)
+    
     for i in range(1,nbTresors+1):
       ListeTrésor.append(i)
 
@@ -122,8 +122,7 @@ def prendreCarteAJouer(plateau):
     paramètre: plateau: le plateau considéré
     résultat: la carte à jouer    
     """    
-    carteJouer=plateau["carte"]
-    return carteJouer
+    return plateau["carte"]
 
 def prendreTresorPlateau(plateau,lig,col,numTresor):
     """
